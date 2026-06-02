@@ -3,9 +3,9 @@ import java.sql.*;
 
 public class Verbindung {
 
-    String url = "\"jdbc:mysql://127.0.0.1:3306/pvs";
-    String user = "root";
-    String password = "";
+    private final String url = "\"jdbc:mysql://127.0.0.1:3306/pvs";
+    private final String user = "root";
+    private final String password = "";
 
 
 
