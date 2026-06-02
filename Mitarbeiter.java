@@ -86,13 +86,13 @@ public class Mitarbeiter { // Klasse für CRUD
     public String toString() { // wenn print(Objekt)
         return "Mitarbeiter{" +
                 "id=" + id +
-                ", persnr='" + personalnummer + '\'' +
+                ", personalnummer='" + personalnummer + '\'' +
                 ", nachname='" + nachname + '\'' +
                 ", vorname='" + vorname + '\'' +
                 ", strasse='" + strasse + '\'' +
-                ", hausnr='" + hausnummer + '\'' +
-                ",  ort='" + ort + '\'' +
+                ", hausnummer='" + hausnummer + '\'' +
+                ", ort='" + ort + '\'' +
                 ", ressort='" + ressort + '\'' +
-                '}';
+                '}' + "\n";
     }
 }

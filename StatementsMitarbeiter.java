@@ -1,8 +1,10 @@
 package pvs;
-
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.sql.*;
 
-public class Statements {
+public class StatementsMitarbeiter {
 
     private final String url = "jdbc:mysql://127.0.0.1:3306/pvs";
     private final String user = "root";
@@ -72,6 +74,64 @@ public class Statements {
     }
 
 
+
+
+
+    public Mitarbeiter lesenNachId (int id) {
+        String sql = "SELECT * FROM mitarbeiter WHERE id = ?";
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+        PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Mitarbeiter(
+                        rs.getInt("id"),
+                        rs.getString("personalnummer"),
+                        rs.getString("nachname"),
+                        rs.getString("vorname"),
+                        rs.getString("strasse"),
+                        rs.getString("hausnummer"),
+                        rs.getInt("ort"),
+                        rs.getInt("ressort")
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println("Datensatz nicht gelesen.");
+        }
+        return null;
+    }
+
+
+
+
+
+
+
+    public List<Mitarbeiter> lesen() {
+
+        List<Mitarbeiter> liste = new ArrayList<>();
+        String sql = "SELECT * FROM mitarbeiter";
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                Mitarbeiter m = new Mitarbeiter(
+                        rs.getInt("id"),
+                        rs.getString("personalnummer"),
+                        rs.getString("nachname"),
+                        rs.getString("vorname"),
+                        rs.getString("strasse"),
+                        rs.getString("hausnummer"),
+                        rs.getInt("ort"),
+                        rs.getInt("ressort")
+                );
+                liste.add(m);
+            }
+        } catch (SQLException e) {
+            System.out.println("Datensätze konnten nicht gelesen werden." + e.getMessage());
+        }
+        return liste;
+    }
 
 
 
