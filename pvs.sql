@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 03. Jun 2026 um 11:36
+-- Erstellungszeit: 03. Jun 2026 um 13:39
 -- Server-Version: 10.4.32-MariaDB
 -- PHP-Version: 8.2.12
 
@@ -86,6 +86,19 @@ INSERT INTO `mitarbeiter_projekte` (`id_mitarbeiter`, `id_projekt`) VALUES
 (5, 3),
 (8, 1),
 (8, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `nutzer`
+--
+
+CREATE TABLE `nutzer` (
+  `user_id` int(11) NOT NULL,
+  `passwort` varchar(100) DEFAULT NULL,
+  `rollen_id` int(11) DEFAULT NULL,
+  `email_adresse` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -228,6 +241,27 @@ INSERT INTO `ressorts` (`id`, `bezeichnung`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Tabellenstruktur für Tabelle `tickets`
+--
+
+CREATE TABLE `tickets` (
+  `id` int(11) NOT NULL,
+  `grund` text DEFAULT NULL,
+  `zeitpunkt` datetime DEFAULT NULL,
+  `aussteller1` int(11) DEFAULT NULL,
+  `aussteller2` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Daten für Tabelle `tickets`
+--
+
+INSERT INTO `tickets` (`id`, `grund`, `zeitpunkt`, `aussteller1`, `aussteller2`) VALUES
+(1, 'Bewegt sich unerlaubt ohne Personalnummer auf dem Betriebsgelände', '2021-03-24 11:23:00', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `titel`
 --
 
@@ -236,44 +270,14 @@ CREATE TABLE `titel` (
   `bezeichnung` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Tabellenstruktur für Tabelle `vergehen`
+-- Daten für Tabelle `titel`
 --
 
-CREATE TABLE `vergehen` (
-  `id` int(11) NOT NULL,
-  `mitarbeiter` int(11) DEFAULT NULL,
-  `grund` text DEFAULT NULL,
-  `zeitpunkt` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Daten für Tabelle `vergehen`
---
-
-INSERT INTO `vergehen` (`id`, `mitarbeiter`, `grund`, `zeitpunkt`) VALUES
-(1, 6, 'Bewegt sich unerlaubt ohne Personalnummer auf dem Betriebsgelände', '2021-03-24 11:23:00');
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `verraeter`
---
-
-CREATE TABLE `verraeter` (
-  `id_mitarbeiter` int(11) DEFAULT NULL,
-  `id_vergehen` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Daten für Tabelle `verraeter`
---
-
-INSERT INTO `verraeter` (`id_mitarbeiter`, `id_vergehen`) VALUES
-(12, 1),
-(13, 1);
+INSERT INTO `titel` (`id`, `bezeichnung`) VALUES
+(1, 'Projektleiter'),
+(2, 'VP'),
+(3, 'Director');
 
 -- --------------------------------------------------------
 
@@ -296,6 +300,25 @@ INSERT INTO `vertragstypen` (`id`, `bezeichnung`) VALUES
 (3, 'Praktikant'),
 (4, 'Doktorand');
 
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `verursacher`
+--
+
+CREATE TABLE `verursacher` (
+  `id_mitarbeiter` int(11) DEFAULT NULL,
+  `id_vergehen` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Daten für Tabelle `verursacher`
+--
+
+INSERT INTO `verursacher` (`id_mitarbeiter`, `id_vergehen`) VALUES
+(12, 1),
+(13, 1);
+
 --
 -- Indizes der exportierten Tabellen
 --
@@ -317,6 +340,13 @@ ALTER TABLE `mitarbeiter`
 ALTER TABLE `mitarbeiter_projekte`
   ADD PRIMARY KEY (`id_mitarbeiter`,`id_projekt`),
   ADD KEY `const_projekt_maprojekte` (`id_projekt`);
+
+--
+-- Indizes für die Tabelle `nutzer`
+--
+ALTER TABLE `nutzer`
+  ADD PRIMARY KEY (`user_id`),
+  ADD KEY `rollen_id` (`rollen_id`);
 
 --
 -- Indizes für die Tabelle `orte`
@@ -347,30 +377,31 @@ ALTER TABLE `ressorts`
   ADD UNIQUE KEY `bezeichnung` (`bezeichnung`);
 
 --
+-- Indizes für die Tabelle `tickets`
+--
+ALTER TABLE `tickets`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `aussteller1` (`aussteller1`),
+  ADD KEY `aussteller2` (`aussteller2`);
+
+--
 -- Indizes für die Tabelle `titel`
 --
 ALTER TABLE `titel`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indizes für die Tabelle `vergehen`
---
-ALTER TABLE `vergehen`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `mitarbeiter_vergehen` (`mitarbeiter`);
-
---
--- Indizes für die Tabelle `verraeter`
---
-ALTER TABLE `verraeter`
-  ADD KEY `mitarbeiter_verraeter` (`id_mitarbeiter`),
-  ADD KEY `vergehen_verraeter` (`id_vergehen`);
-
---
 -- Indizes für die Tabelle `vertragstypen`
 --
 ALTER TABLE `vertragstypen`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indizes für die Tabelle `verursacher`
+--
+ALTER TABLE `verursacher`
+  ADD KEY `mitarbeiter_verraeter` (`id_mitarbeiter`),
+  ADD KEY `vergehen_verraeter` (`id_vergehen`);
 
 --
 -- AUTO_INCREMENT für exportierte Tabellen
@@ -381,6 +412,12 @@ ALTER TABLE `vertragstypen`
 --
 ALTER TABLE `mitarbeiter`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT für Tabelle `nutzer`
+--
+ALTER TABLE `nutzer`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `orte`
@@ -407,16 +444,16 @@ ALTER TABLE `ressorts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT für Tabelle `tickets`
+--
+ALTER TABLE `tickets`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT für Tabelle `titel`
 --
 ALTER TABLE `titel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT für Tabelle `vergehen`
---
-ALTER TABLE `vergehen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT für Tabelle `vertragstypen`
@@ -447,6 +484,12 @@ ALTER TABLE `mitarbeiter_projekte`
   ADD CONSTRAINT `const_projekt_maprojekte` FOREIGN KEY (`id_projekt`) REFERENCES `projekte` (`id`);
 
 --
+-- Constraints der Tabelle `nutzer`
+--
+ALTER TABLE `nutzer`
+  ADD CONSTRAINT `nutzer_ibfk_1` FOREIGN KEY (`rollen_id`) REFERENCES `titel` (`id`);
+
+--
 -- Constraints der Tabelle `projektleitung`
 --
 ALTER TABLE `projektleitung`
@@ -454,17 +497,11 @@ ALTER TABLE `projektleitung`
   ADD CONSTRAINT `projektleitung_ibfk_2` FOREIGN KEY (`mitarbeiter_id`) REFERENCES `mitarbeiter` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints der Tabelle `vergehen`
+-- Constraints der Tabelle `verursacher`
 --
-ALTER TABLE `vergehen`
-  ADD CONSTRAINT `mitarbeiter_vergehen` FOREIGN KEY (`mitarbeiter`) REFERENCES `mitarbeiter` (`id`);
-
---
--- Constraints der Tabelle `verraeter`
---
-ALTER TABLE `verraeter`
+ALTER TABLE `verursacher`
   ADD CONSTRAINT `mitarbeiter_verraeter` FOREIGN KEY (`id_mitarbeiter`) REFERENCES `mitarbeiter` (`id`),
-  ADD CONSTRAINT `vergehen_verraeter` FOREIGN KEY (`id_vergehen`) REFERENCES `vergehen` (`id`);
+  ADD CONSTRAINT `vergehen_verraeter` FOREIGN KEY (`id_vergehen`) REFERENCES `tickets` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
