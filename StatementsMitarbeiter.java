@@ -24,7 +24,7 @@ public class StatementsMitarbeiter {
             ps.setString(4,  m.getVorname());
             ps.setString(5,  m.getStrasse());
             ps.setString(6, m.getHausnr());
-            ps.setObject(7, m.getOrt());
+            ps.setInt(7, m.getOrt().getOrtId());
             ps.setInt(8, m.getRessort());
             ps.setString(9, m.getGeburtsdatum());
             ps.setInt(10, m.getVertragstyp());
@@ -66,7 +66,7 @@ public class StatementsMitarbeiter {
             ps.setString(3, m.getVorname());
             ps.setString(4, m.getStrasse());
             ps.setString(5, m.getHausnr());
-            ps.setObject(6, m.getOrt());
+            ps.setInt(6, m.getOrt().getOrtId());
             ps.setInt(7, m.getRessort());
             ps.setString(8,  m.getGeburtsdatum());
             ps.setInt(9, m.getVertragstyp());
@@ -84,14 +84,14 @@ public class StatementsMitarbeiter {
 
 
     public Mitarbeiter lesenNachId (int id) {
-        String sql = "SELECT m.*, o.id, o.plz, o.ortsname FROM mitarbeiter m JOIN orte o ON m.ort = o.id WHERE id = ?";
+        String sql = "SELECT m.*, o.id AS ort_id, o.plz, o.ortsname FROM mitarbeiter m JOIN orte o ON m.ort = o.id WHERE m.id = ?";
         try (Connection conn = DriverManager.getConnection(url, user, password);
         PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 Ort ort = new Ort(
-                        rs.getInt("id"),
+                        rs.getInt("ort_id"),
                         rs.getString("plz"),
                         rs.getString("ortsname")
                 );
@@ -110,7 +110,7 @@ public class StatementsMitarbeiter {
                 );
             }
         } catch (SQLException e) {
-            System.out.println("Datensatz nicht gelesen.");
+            System.out.println("Datensatz nicht gelesen." + e.getMessage());
         }
         return null;
     }
