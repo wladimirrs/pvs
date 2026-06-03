@@ -8,12 +8,15 @@ public class Mitarbeiter { // Klasse für CRUD
     private String vorname;
     private String strasse;
     private String hausnummer;
-    private int ort;
+    private Ort ort;
     private int ressort;
+    private String geburtsdatum;
+    private int vertragstyp;
+    private int titel;
 
 
                         // 1 Konstruktor
-    public Mitarbeiter(int id, String persnr, String nachname, String vorname, String strasse, String hausnummer, int ort, int ressort) {
+    public Mitarbeiter(int id, String personalnummer, String nachname, String vorname, String strasse, String hausnummer, Ort ort, int ressort, String geburtsdatum, int vertragstyp, int titel) {
         this.id = id;
         this.personalnummer = personalnummer;
         this.nachname = nachname;
@@ -22,6 +25,9 @@ public class Mitarbeiter { // Klasse für CRUD
         this.hausnummer = hausnummer;
         this.ort = ort;
         this.ressort = ressort;
+        this.geburtsdatum = geburtsdatum;
+        this.vertragstyp = vertragstyp;
+        this.titel = titel;
     }
 
 
@@ -36,7 +42,7 @@ public class Mitarbeiter { // Klasse für CRUD
     public String getPersnr() {
         return personalnummer;
     }
-    public void setPersnr(String persnr) {
+    public void setPersnr(String personalnummer) {
         this.personalnummer = personalnummer;
     }
 
@@ -64,14 +70,14 @@ public class Mitarbeiter { // Klasse für CRUD
     public String getHausnr() {
         return hausnummer;
     }
-    public void setHausnr(String hausnr) {
-        this.hausnummer = hausnr;
+    public void setHausnr(String hausnummer) {
+        this.hausnummer = hausnummer;
     }
 
-    public int getOrt() {
+    public Ort getOrt() {
         return ort;
     }
-    public void setOrt(int ort) {
+    public void setOrt(Ort ort) {
         this.ort = ort;
     }
 
@@ -82,17 +88,30 @@ public class Mitarbeiter { // Klasse für CRUD
         this.ressort = ressort;
     }
 
+    public String getGeburtsdatum() {
+        return geburtsdatum;
+    }
+    public void setGeburtsdatum(String geburtsdatum) {
+        this.geburtsdatum = geburtsdatum;
+    }
+
+    public int getVertragstyp() {
+        return vertragstyp;
+    }
+    public void setVertragstyp(int vertragstyp) {
+        this.vertragstyp = vertragstyp;
+    }
+
+    public int getTitel() {
+        return titel;
+    }
+    public void setTitel(int titel) {
+        this.titel = titel;
+    }
+
     @Override
     public String toString() { // wenn print(Objekt)
-        return "Mitarbeiter{" +
-                "id=" + id +
-                ", personalnummer='" + personalnummer + '\'' +
-                ", nachname='" + nachname + '\'' +
-                ", vorname='" + vorname + '\'' +
-                ", strasse='" + strasse + '\'' +
-                ", hausnummer='" + hausnummer + '\'' +
-                ", ort='" + ort + '\'' +
-                ", ressort='" + ressort + '\'' +
-                '}' + "\n";
+        return "Mitarbeiter " + vorname + " " + nachname + ", Pers-Nr. " + personalnummer + ", wohnhaft " +
+                strasse + " " + hausnummer + ", " + ort + "\n";
     }
 }
