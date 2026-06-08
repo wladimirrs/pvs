@@ -1,117 +1,166 @@
 package pvs;
 
-public class Mitarbeiter { // Klasse für CRUD
+import javafx.beans.property.*;
 
-    private int id;
-    private String personalnummer;
-    private String nachname;
-    private String vorname;
-    private String strasse;
-    private String hausnummer;
-    private Ort ort;
-    private int ressort;
-    private String geburtsdatum;
-    private int vertragstyp;
-    private int titel;
+public class Mitarbeiter {
 
+    private final IntegerProperty id = new SimpleIntegerProperty(); // Zeichenketten aktualisieren
+    private final StringProperty nachname = new SimpleStringProperty();
+    private final StringProperty vorname = new SimpleStringProperty();
+    private final StringProperty personalnummer = new  SimpleStringProperty();
+    private final StringProperty strasse = new SimpleStringProperty();
+    private final StringProperty hausnummer = new SimpleStringProperty();
+    private final StringProperty geburtsdatum = new  SimpleStringProperty();
+    private ObjectProperty<Ort> ort = new SimpleObjectProperty<>();
+    private ObjectProperty<Ressort> ressort = new SimpleObjectProperty<>();
+    private ObjectProperty<Vertragstyp> vertragstyp = new SimpleObjectProperty<>();
+                                                                    // Konstruktor
+    public Mitarbeiter(int id, String nachname, String vorname, String personalnummer, String strasse, String hausnummer, String geburtsdatum, Ort ort, Ressort ressort, Vertragstyp vertragstyp) {   // Konstruktor
+        this.id.set(id);
+        this.nachname.set(nachname);
+        this.vorname.set(vorname);
+        this.personalnummer.set(personalnummer);
+        this.strasse.set(strasse);
+        this.hausnummer.set(hausnummer);
+        this.geburtsdatum.set(geburtsdatum);
+        this.ort.set(ort);
+        this.ressort.set(ressort);
+        this.vertragstyp.set(vertragstyp);
+    }
 
-                        // 1 Konstruktor
-    public Mitarbeiter(int id, String personalnummer, String nachname, String vorname, String strasse, String hausnummer, Ort ort, int ressort, String geburtsdatum, int vertragstyp, int titel) {
-        this.id = id;
-        this.personalnummer = personalnummer;
-        this.nachname = nachname;
-        this.vorname = vorname;
-        this.strasse = strasse;
-        this.hausnummer = hausnummer;
-        this.ort = ort;
-        this.ressort = ressort;
-        this.geburtsdatum = geburtsdatum;
-        this.vertragstyp = vertragstyp;
-        this.titel = titel;
+    Mitarbeiter (int id, String nachname, String vorname) {
+        this.id.set(id);
+        this.nachname.set(nachname);
+        this.vorname.set(vorname);
     }
 
 
-
-    public int getId() {    // Getter und Setter
+    public int getId() {                                            // getter und setter
+        return id.get();
+    }
+    public void setId(int value) {
+        id.set(value);
+    }
+    public IntegerProperty idProperty() {
         return id;
-    }  // Getter und Setter
-    public void setId(int id) {
-        this.id = id;
     }
 
-    public String getPersnr() {
-        return personalnummer;
-    }
-    public void setPersnr(String personalnummer) {
-        this.personalnummer = personalnummer;
-    }
+
+
 
     public String getNachname() {
+        return nachname.get();
+    }
+    public void setNachname(String value) {
+        nachname.set(value);
+    }
+
+    public StringProperty nachnameProperty() {
         return nachname;
     }
-    public void setNachname(String nachname) {
-        this.nachname = nachname;
-    }
+
+
+
+
 
     public String getVorname() {
+        return vorname.get();
+    }
+    public void setVorname(String value) {
+        vorname.set(value);
+    }
+    public StringProperty vornameProperty() {
         return vorname;
     }
-    public void setVorname(String vorname) {
-        this.vorname = vorname;
+
+
+
+
+
+    public String getPersonalnummer() {
+        return personalnummer.get();
     }
+    public void setPersonalnummer(String value) {
+        personalnummer.set(value);
+    }
+    public StringProperty personalnummerProperty() {
+        return personalnummer;
+    }
+
+
 
     public String getStrasse() {
+        return strasse.get();
+    }
+    public void setStrasse(String value) {
+        strasse.set(value);
+    }
+    public StringProperty strasseProperty() {
         return strasse;
     }
-    public void setStrasse(String strasse) {
-        this.strasse = strasse;
-    }
 
-    public String getHausnr() {
+
+
+
+
+    public String getHausnummer() {
+        return hausnummer.get();
+    }
+    public void setHausnummer(String value) {
+        hausnummer.set(value);
+    }
+    public StringProperty hausnummerProperty() {
         return hausnummer;
     }
-    public void setHausnr(String hausnummer) {
-        this.hausnummer = hausnummer;
-    }
 
-    public Ort getOrt() {
-        return ort;
-    }
-    public void setOrt(Ort ort) {
-        this.ort = ort;
-    }
 
-    public int getRessort() {
-        return ressort;
-    }
-    public void setRessort(int ressort) {
-        this.ressort = ressort;
-    }
+
 
     public String getGeburtsdatum() {
+        return geburtsdatum.get();
+    }
+    public void setGeburtsdatum(String value) {
+        geburtsdatum.set(value);
+    }
+    public StringProperty geburtsdatumProperty() {
         return geburtsdatum;
     }
-    public void setGeburtsdatum(String geburtsdatum) {
-        this.geburtsdatum = geburtsdatum;
+
+
+
+    public ObjectProperty<Ort> getOrt () {
+        return ort;
+    }
+    public void setOrt (Ort value) {
+        this.ort = ort;
+    }
+    public ObjectProperty<Ort> ortProperty() {
+        return ort;
     }
 
-    public int getVertragstyp() {
+
+
+
+    public ObjectProperty<Ressort> getRessort() {
+        return ressort;
+    }
+    public void setRessort(Ressort value) {
+        this.ressort = ressort;
+    }
+    public ObjectProperty<Ressort> ressortProperty() {
+        return ressort;
+    }
+
+
+
+    public ObjectProperty<Vertragstyp> getVertragstyp() {
         return vertragstyp;
     }
-    public void setVertragstyp(int vertragstyp) {
+    public void setVertragstyp(Vertragstyp value) {
         this.vertragstyp = vertragstyp;
     }
-
-    public int getTitel() {
-        return titel;
+    public ObjectProperty<Vertragstyp> vertragstypProperty() {
+        return vertragstyp;
     }
-    public void setTitel(int titel) {
-        this.titel = titel;
-    }
-
-    @Override
-    public String toString() { // wenn print(Objekt)
-        return "Mitarbeiter " + vorname + " " + nachname + ", Pers-Nr. " + personalnummer + ", wohnhaft " +
-                strasse + " " + hausnummer + ", " + ort + "\n";
-    }
+    
 }
