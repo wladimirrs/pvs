@@ -21,6 +21,9 @@ public class DashboardController {
     @FXML
     private Button btnTickets;
 
+    @FXML
+    private Button btnProjekte;
+
     @FXML                       // Fenster content und main (mitte und oben)
     private AnchorPane contentPane;
 
@@ -64,6 +67,24 @@ public class DashboardController {
     void loadTickets(ActionEvent event) { // Tickets laden
         ViewLoader loader = new ViewLoader();
         Pane view = loader.loadView("TicketView");
+
+        if (view != null) {
+            contentPane.getChildren().clear();
+            contentPane.getChildren().add(view);
+
+            AnchorPane.setTopAnchor(view, 0.0);  // Rand
+            AnchorPane.setBottomAnchor(view, 0.0);
+            AnchorPane.setLeftAnchor(view, 0.0);
+            AnchorPane.setRightAnchor(view, 0.0);
+        }
+    }
+
+
+
+    @FXML
+    void loadProjekte(ActionEvent event) { // Tickets laden
+        ViewLoader loader = new ViewLoader();
+        Pane view = loader.loadView("ProjektView");
 
         if (view != null) {
             contentPane.getChildren().clear();

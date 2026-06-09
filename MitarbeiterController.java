@@ -36,6 +36,16 @@ public class MitarbeiterController {
     @FXML private TableColumn<Mitarbeiter, Vertragstyp> colVertragstyp;
 
     @FXML private TextField txtEingabe;
+    @FXML private TextField txtId;
+    @FXML private TextField txtNachname;
+    @FXML private TextField txtVorname;
+    @FXML private TextField txtPersonalnummer;
+    @FXML private TextField txtStrasse;
+    @FXML private TextField txtHausnummer;
+    @FXML private TextField txtGeburtsdatum;
+    @FXML private TextField txtOrt;
+    @FXML private TextField txtRessort;
+    @FXML private TextField txtVertragstyp;
 
     private ObservableList<Mitarbeiter> daten;
 
@@ -66,20 +76,28 @@ public class MitarbeiterController {
 
     @FXML
     void einfuegen(ActionEvent event) {
-        String input = txtEingabe.getText();
-        if (input == null || input.isBlank()) return;
-        String[] parts = input.split(" ");
+        String nachname = txtNachname.getText();
+        String vorname = txtVorname.getText();
+        String personalnummer = txtPersonalnummer.getText();
+        String strasse = txtStrasse.getText();
+        String hausnummer = txtHausnummer.getText();
+        String geburtsdatum = txtGeburtsdatum.getText();
+        int ort = Integer.parseInt(txtOrt.getText());
+        int ressort = Integer.parseInt(txtRessort.getText());
+        int vertragstyp = Integer.parseInt(txtVertragstyp.getText());
+        if (nachname == null || vorname == null || nachname.isEmpty() || vorname.isEmpty()) {
+            return;
+        }
         Mitarbeiter m = new Mitarbeiter(
-                0,
-                parts.length > 0 ? parts[0] : "",
-                parts.length > 1 ? parts[1] : "",
-                parts.length > 2 ? parts[2] : "",
-                parts.length > 3 ? parts[3] : "",
-                parts.length > 4 ? parts[4] : "",
-                parts.length > 5 ? parts[5] : "",
-                Ort.fromId(Integer.parseInt(parts[6])),
-                Ressort.fromId(Integer.parseInt(parts[7])),
-                Vertragstyp.fromId(Integer.parseInt(parts[8]))
+                nachname,
+                vorname,
+                personalnummer,
+                strasse,
+                hausnummer,
+                geburtsdatum,
+                Ort.fromId(ort),
+                Ressort.fromId(ressort),
+                Vertragstyp.fromId(vertragstyp)
         );
         MitarbeiterDAO.insert(m);
         daten.setAll(MitarbeiterDAO.getAll());
@@ -96,27 +114,32 @@ public class MitarbeiterController {
 
     @FXML
     void aendern(ActionEvent event) {
-        Mitarbeiter selected = tblMitarbeiter.getSelectionModel().getSelectedItem();
-        String input = txtEingabe.getText();
-        if (selected == null || input == null || input.isBlank()) return;
-        String[] parts = input.split(" ");
-        selected.setNachname(parts.length > 0 ? parts[0] : selected.getNachname());
-        selected.setVorname(parts.length > 1 ? parts[1] : selected.getVorname());
-        selected.setPersonalnummer(parts.length > 2 ? parts[2] : selected.getPersonalnummer());
-        selected.setStrasse(parts.length > 3 ? parts[3] : selected.getStrasse());
-        selected.setHausnummer(parts.length > 4 ? parts[4] : selected.getHausnummer());
-        selected.setGeburtsdatum(parts.length > 5 ? parts[5] : selected.getGeburtsdatum());
-        if (parts.length > 6) {
-            selected.setOrt(Ort.fromId(Integer.parseInt(parts[6])));
+        int id = Integer.parseInt(txtId.getText());
+        String nachname = txtNachname.getText();
+        String vorname = txtVorname.getText();
+        String personalnummer = txtPersonalnummer.getText();
+        String strasse = txtStrasse.getText();
+        String hausnummer = txtHausnummer.getText();
+        String geburtsdatum = txtGeburtsdatum.getText();
+        int ort = Integer.parseInt(txtOrt.getText());
+        int ressort = Integer.parseInt(txtRessort.getText());
+        int vertragstyp = Integer.parseInt(txtVertragstyp.getText());
+        if (nachname == null || vorname == null || nachname.isEmpty() || vorname.isEmpty()) {
+            return;
         }
-        if (parts.length > 7) {
-            selected.setRessort(Ressort.fromId(Integer.parseInt(parts[7])));
-        }
-        if (parts.length > 8) {
-            selected.setVertragstyp(Vertragstyp.fromId(Integer.parseInt(parts[8])));
-        }
-
-        MitarbeiterDAO.update(selected);
+        Mitarbeiter m = new Mitarbeiter(
+                id,
+                nachname,
+                vorname,
+                personalnummer,
+                strasse,
+                hausnummer,
+                geburtsdatum,
+                Ort.fromId(ort),
+                Ressort.fromId(ressort),
+                Vertragstyp.fromId(vertragstyp)
+        );
+        MitarbeiterDAO.update(m);
         daten.setAll(MitarbeiterDAO.getAll());
     }
 

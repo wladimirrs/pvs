@@ -28,6 +28,18 @@ public class Mitarbeiter {
         this.vertragstyp.set(vertragstyp);
     }
 
+    public Mitarbeiter(String nachname, String vorname, String personalnummer, String strasse, String hausnummer, String geburtsdatum, Ort ort, Ressort ressort, Vertragstyp vertragstyp) {   // Konstruktor
+        this.nachname.set(nachname);
+        this.vorname.set(vorname);
+        this.personalnummer.set(personalnummer);
+        this.strasse.set(strasse);
+        this.hausnummer.set(hausnummer);
+        this.geburtsdatum.set(geburtsdatum);
+        this.ort.set(ort);
+        this.ressort.set(ressort);
+        this.vertragstyp.set(vertragstyp);
+    }
+
     Mitarbeiter (int id, String nachname, String vorname) {
         this.id.set(id);
         this.nachname.set(nachname);

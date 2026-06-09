@@ -18,6 +18,7 @@ public class TicketController {
     @FXML private Button btnSuchen2;
     @FXML private TextField txtEingabe2;
 
+    @FXML private TextField txtId;
     @FXML private TextField txtGrund;
     @FXML private TextField txtZeitpunkt;
     @FXML private TextField txtAussteller1;
@@ -57,7 +58,7 @@ public class TicketController {
 
     @FXML
     void aendern2(ActionEvent event) {
-        int id = Integer.parseInt(txtEingabe2.getText());
+        int id = Integer.parseInt(txtId.getText());
         String grund = txtGrund.getText();
         String zeitpunkt = txtZeitpunkt.getText();
         if (grund == null || grund.isBlank()
