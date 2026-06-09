@@ -10,8 +10,8 @@ public class PvsApp extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(PvsApp.class.getResource("Dashboard.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1100 , 900);
+        FXMLLoader fxmlLoader = new FXMLLoader(PvsApp.class.getResource("DefaultView.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1150 , 900);
         stage.setResizable(false);
         stage.setTitle("Projektverwaltungssystem");
         stage.setScene(scene);

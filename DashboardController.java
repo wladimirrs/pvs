@@ -13,6 +13,9 @@ public class DashboardController {
     private Button btnBeenden;
 
     @FXML
+    private Button btnLogout;
+
+    @FXML
     private Button btnHome;
 
     @FXML
@@ -37,6 +40,19 @@ public class DashboardController {
     @FXML
     void beenden(ActionEvent event) { // App beenden
         System.exit(0);
+    }
+
+    @FXML
+    void loadLogout(ActionEvent event) {
+        ViewLoader viewLoader = new ViewLoader();
+        Pane view = viewLoader.loadView("DefaultView");
+        mainPane.getChildren().clear();
+        mainPane.getChildren().add(view);
+
+        AnchorPane.setTopAnchor(view, 0.0);
+        AnchorPane.setBottomAnchor(view, 0.0);
+        AnchorPane.setLeftAnchor(view, 0.0);
+        AnchorPane.setRightAnchor(view, 0.0);
     }
 
     @FXML
