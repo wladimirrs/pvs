@@ -12,25 +12,31 @@ public class Vertragstyp {
 
     public Vertragstyp() {}
 
+    public Vertragstyp (String bezeichnung) {
+        this.bezeichnung = bezeichnung;
+    }
+
+
+
     public int getId() {
         return id;
     }
-
-    public String getPlz() {
+    public String getBezeichnung() {
         return bezeichnung;
     }
 
 
 
     public static Vertragstyp fromId(int id) {
-        // Beispiel: harte Zuordnung (oder DB Lookup)
-        switch (id) {
-            case 1: return new Vertragstyp(1, "Mitarbeiter");
-            case 2: return new Vertragstyp(2, "Auszubildender");
-            case 3: return new Vertragstyp(3, "Praktikant");
-            case 4: return new Vertragstyp (4, "Doktorand");
-            default: throw new IllegalArgumentException("Ungültige Ort-ID: " + id);
+        Vertragstyp v = MitarbeiterDAO.getByVertragstyp(id);
+        if (v == null) {
+            throw new IllegalArgumentException(
+                    "Ungültige Aussteller-ID: " + id);
         }
+        return new Vertragstyp(
+                v.getId(),
+                v.getBezeichnung()
+        );
     }
 
     @Override

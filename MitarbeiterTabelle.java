@@ -32,7 +32,7 @@ public class MitarbeiterTabelle implements Initializable {
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {    // Werte in die Spalten setzen
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         mitarbeiterliste.setAll(s1.getAll());
 
         tvId.setCellValueFactory(new PropertyValueFactory<>("id"));

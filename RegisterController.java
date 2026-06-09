@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 
 public class RegisterController {
 
-    @FXML                       // Buttons
+    @FXML
     private Button btnRegister;
 
     @FXML
@@ -23,7 +23,7 @@ public class RegisterController {
     @FXML
     private Button btnBeenden;
 
-    @FXML                       // Fenster content und main (mitte und oben)
+    @FXML
     private AnchorPane contentPane;
 
     @FXML
@@ -61,7 +61,7 @@ public class RegisterController {
     }
 
     @FXML
-    void loadRegister(ActionEvent event) { // Tickets laden
+    void loadRegister(ActionEvent event) {
         ViewLoader loader = new ViewLoader();
         Pane view = loader.loadView("RegisterView");
 
@@ -81,11 +81,11 @@ public class RegisterController {
 
 
     @FXML
-    void loadAusfuehren(ActionEvent event) throws Exception {
+    void loadAusfuehren(ActionEvent event) throws Exception {       // Registrierung durchführen
         boolean ok = NutzerDAO.register(txtEmail.getText(), txtPasswort.getText());
         if (ok) {
             ViewLoader viewLoader = new ViewLoader();
-            Pane view = viewLoader.loadView("LoginView");
+            Pane view = viewLoader.loadView("LoginView");   // Zum Login weitergeleitet
             mainPane.getChildren().clear();
             mainPane.getChildren().add(view);
 

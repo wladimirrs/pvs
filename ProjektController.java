@@ -26,10 +26,9 @@ public class ProjektController {
 
 
 
-    @FXML private AnchorPane mitarbeiterPane;         // Fenster
-    @FXML private TableView<Projekt> tblProjekt;        // Tabelle
+    @FXML private TableView<Projekt> tblProjekt;
 
-    @FXML private TableColumn<Projekt, Number> colProjektleitungId;             // Tabellenspalten
+    @FXML private TableColumn<Projekt, Number> colProjektleitungId;
     @FXML private TableColumn<Projekt, Pro> colProjektId;
     @FXML private TableColumn<Projekt, Mit> colMitarbeiterId;
     @FXML private TableColumn<Projekt, String> colVon;
@@ -38,8 +37,7 @@ public class ProjektController {
 
 
     @FXML
-    public void initialize() {      // Spalten setzen
-
+    public void initialize() {
         colProjektleitungId.setCellValueFactory(data -> data.getValue().idProperty());
         colProjektId.setCellValueFactory(data -> data.getValue().proProperty());
         colMitarbeiterId.setCellValueFactory(data -> data.getValue().mitProperty());

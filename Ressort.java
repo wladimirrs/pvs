@@ -12,21 +12,36 @@ public class Ressort {
 
     public Ressort() {}
 
+    public Ressort (String bezeichnung) {
+        this.bezeichnung = bezeichnung;
+    }
+
+
+
+
+
+
     public int getId() {
         return id;
     }
-
     public String getBezeichnung() {
         return bezeichnung;
     }
 
+
+
+
+
     public static Ressort fromId(int id) {
-        switch (id) {
-            case 1: return new Ressort(1, "Stadtgärtnerei");
-            case 2: return new Ressort(2, "Bauamt");
-            case 3: return new Ressort(3, "Ordnungsamt");
-            default: throw new IllegalArgumentException("Ungültige Ort-ID: " + id);
+        Ressort r = MitarbeiterDAO.getByRessort(id);
+        if (r == null) {
+            throw new IllegalArgumentException(
+                    "Ungültige Aussteller-ID: " + id);
         }
+        return new Ressort(
+                r.getId(),
+                r.getBezeichnung()
+        );
     }
 
     @Override

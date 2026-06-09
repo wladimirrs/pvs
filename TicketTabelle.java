@@ -29,7 +29,7 @@ public class TicketTabelle implements Initializable {
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {    // Werte in die Spalten setzen
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         ticketliste.setAll((Ticket) s1.getAll());
 
         tvId.setCellValueFactory(new PropertyValueFactory<>("id"));

@@ -27,10 +27,9 @@ public class TicketController {
 
 
 
-    @FXML private AnchorPane mitarbeiterPane;         // Fenster
-    @FXML private TableView<Ticket> tblTicket;        // Tabelle
+    @FXML private TableView<Ticket> tblTicket;
 
-    @FXML private TableColumn<Ticket, Number> colId;             // Tabellenspalten
+    @FXML private TableColumn<Ticket, Number> colId;
     @FXML private TableColumn<Ticket, String> colGrund;
     @FXML private TableColumn<Ticket, String> colZeitpunkt;
     @FXML private TableColumn<Ticket, Aussteller1> colAussteller1;
@@ -40,7 +39,7 @@ public class TicketController {
 
 
     @FXML
-    public void initialize() {      // Spalten setzen
+    public void initialize() {
 
         colId.setCellValueFactory(data -> data.getValue().idProperty());
         colGrund.setCellValueFactory(data -> data.getValue().grundProperty());

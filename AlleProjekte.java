@@ -4,11 +4,10 @@ import javafx.beans.property.*;
 
 public class AlleProjekte {
 
-    private final IntegerProperty id = new SimpleIntegerProperty(); // Zeichenketten aktualisieren
+    private final IntegerProperty id = new SimpleIntegerProperty();
     private final StringProperty bezeichnung = new SimpleStringProperty();
 
-    // Konstruktor
-    public AlleProjekte(int id, String bezeichnung) {   // Konstruktor
+    public AlleProjekte(int id, String bezeichnung) {
         this.id.set(id);
         this.bezeichnung.set(bezeichnung);
     }
@@ -35,7 +34,6 @@ public class AlleProjekte {
     public void setBezeichnung(String value) {
         bezeichnung.set(value);
     }
-
     public StringProperty bezeichnungProperty() {
         return bezeichnung;
     }

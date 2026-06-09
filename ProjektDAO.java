@@ -31,7 +31,7 @@ public class ProjektDAO {
     }
 
     public static void delete(int id) {
-        String sql = "DELETE FROM projektleitung WHERE id = ?";
+        String sql = "DELETE FROM projektleitung WHERE projektleitung_id = ?";
         try (Connection con = DB.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, id);

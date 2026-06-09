@@ -9,7 +9,7 @@ import javafx.scene.layout.Pane;
 
 public class DefaultController {
 
-    @FXML                       // Buttons
+    @FXML
     private Button btnRegister;
 
     @FXML
@@ -18,7 +18,7 @@ public class DefaultController {
     @FXML
     private Button btnBeenden;
 
-    @FXML                       // Fenster content und main (mitte und oben)
+    @FXML
     private AnchorPane contentPane;
 
     @FXML
@@ -59,7 +59,7 @@ public class DefaultController {
             mainPane.getChildren().clear();
             mainPane.getChildren().add(view);
 
-            AnchorPane.setTopAnchor(view, 0.0);  // Rand
+            AnchorPane.setTopAnchor(view, 0.0);
             AnchorPane.setBottomAnchor(view, 0.0);
             AnchorPane.setLeftAnchor(view, 0.0);
             AnchorPane.setRightAnchor(view, 0.0);

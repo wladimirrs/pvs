@@ -21,11 +21,9 @@ public class Aussteller1 {
     public int getId() {
         return id;
     }
-
     public String getNachname() {
         return nachname;
     }
-
     public String getVorname() {
         return vorname;
     }
@@ -33,16 +31,16 @@ public class Aussteller1 {
     public void setId(int id) {
         this.id = id;
     }
-
     public void setNachname(String nachname) {
         this.nachname = nachname;
     }
-
     public void setVorname(String vorname) {
         this.vorname = vorname;
     }
 
-    public static Aussteller1 fromId(int id) {
+
+
+    public static Aussteller1 fromId(int id) {  // feste Ticketaussteller
         return switch (id) {
             case 12 -> new Aussteller1(12, "Walder", "Jessica");
             case 13 -> new Aussteller1(13, "Hegenbergh", "Hendrik");

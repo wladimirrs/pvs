@@ -28,7 +28,7 @@ public class ProjektTabelle implements Initializable {
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {    // Werte in die Spalten setzen
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         projektliste.setAll((Projekt) s1.getAll());
 
         tvId.setCellValueFactory(new PropertyValueFactory<>("id"));

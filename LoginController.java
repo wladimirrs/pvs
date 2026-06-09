@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 public class LoginController {
 
-    @FXML                       // Buttons
+    @FXML
     private Button btnRegister;
 
     @FXML
@@ -27,7 +27,7 @@ public class LoginController {
     @FXML
     private Button btnBeenden;
 
-    @FXML                       // Fenster content und main (mitte und oben)
+    @FXML
     private AnchorPane contentPane;
 
     @FXML
@@ -36,7 +36,7 @@ public class LoginController {
 
 
     @FXML private TextField txtEmail;
-    @FXML private PasswordField txtPasswort;
+    @FXML private PasswordField txtPasswort;    // Zeichen nicht sichtbar
 
 
 
@@ -73,7 +73,7 @@ public class LoginController {
             mainPane.getChildren().clear();
             mainPane.getChildren().add(view);
 
-            AnchorPane.setTopAnchor(view, 0.0);  // Rand
+            AnchorPane.setTopAnchor(view, 0.0);
             AnchorPane.setBottomAnchor(view, 0.0);
             AnchorPane.setLeftAnchor(view, 0.0);
             AnchorPane.setRightAnchor(view, 0.0);
@@ -81,7 +81,7 @@ public class LoginController {
     }
 
     @FXML
-    void loadAusfuehren(ActionEvent event) throws Exception {
+    void loadAusfuehren(ActionEvent event) throws Exception {   // Login durchführen
 
         boolean ok = NutzerDAO.login(txtEmail.getText(), txtPasswort.getText());
         if (ok) {

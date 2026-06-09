@@ -19,7 +19,6 @@ public class Pro {
     public int getId() {
         return id;
     }
-
     public String getBezeichnung() {
         return bezeichnung;
     }
@@ -27,7 +26,6 @@ public class Pro {
     public void setId(int id) {
         this.id = id;
     }
-
     public void setBezeichnung(String bezeichnung) {
         this.bezeichnung = bezeichnung;
     }

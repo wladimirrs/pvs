@@ -9,14 +9,14 @@ import javafx.scene.layout.Pane;
 
 public class DashboardController {
 
-    @FXML                       // Buttons
-    private Button btnBeenden;
+    @FXML
+    private Button btnBeenden;  // Logout-Button und Beenden-Knopf bei anderen fenstern übernommen
 
     @FXML
     private Button btnLogout;
 
     @FXML
-    private Button btnHome;
+    private Button btnHome;     // Navigation
 
     @FXML
     private Button btnMitarbeiter;
@@ -27,7 +27,19 @@ public class DashboardController {
     @FXML
     private Button btnProjekte;
 
-    @FXML                       // Fenster content und main (mitte und oben)
+    @FXML
+    private Button btnOrte;
+
+    @FXML
+    private Button btnRessorts;
+
+    @FXML
+    private Button btnVertragstypen;
+
+    @FXML
+    private Button btnProjektdaten;
+
+    @FXML                       // Fenster content und main (Mitte und oben)
     private AnchorPane contentPane;
 
     @FXML
@@ -45,7 +57,7 @@ public class DashboardController {
     @FXML
     void loadLogout(ActionEvent event) {
         ViewLoader viewLoader = new ViewLoader();
-        Pane view = viewLoader.loadView("DefaultView");
+        Pane view = viewLoader.loadView("DefaultView"); // Beim Logout zurück zum DefaultView
         mainPane.getChildren().clear();
         mainPane.getChildren().add(view);
 
@@ -98,7 +110,7 @@ public class DashboardController {
 
 
     @FXML
-    void loadProjekte(ActionEvent event) { // Tickets laden
+    void loadProjekte(ActionEvent event) { // Projekthistorie laden
         ViewLoader loader = new ViewLoader();
         Pane view = loader.loadView("ProjektView");
 
@@ -106,11 +118,89 @@ public class DashboardController {
             contentPane.getChildren().clear();
             contentPane.getChildren().add(view);
 
-            AnchorPane.setTopAnchor(view, 0.0);  // Rand
+            AnchorPane.setTopAnchor(view, 0.0);
             AnchorPane.setBottomAnchor(view, 0.0);
             AnchorPane.setLeftAnchor(view, 0.0);
             AnchorPane.setRightAnchor(view, 0.0);
         }
     }
+
+
+
+
+
+
+
+    @FXML
+    void loadOrte(ActionEvent event) { // Orte laden
+        ViewLoader loader = new ViewLoader();
+        Pane view = loader.loadView("OrteView");
+
+        if (view != null) {
+            contentPane.getChildren().clear();
+            contentPane.getChildren().add(view);
+
+            AnchorPane.setTopAnchor(view, 0.0);
+            AnchorPane.setBottomAnchor(view, 0.0);
+            AnchorPane.setLeftAnchor(view, 0.0);
+            AnchorPane.setRightAnchor(view, 0.0);
+        }
+    }
+
+
+    @FXML
+    void loadRessorts(ActionEvent event) { // Ressorts laden
+        ViewLoader loader = new ViewLoader();
+        Pane view = loader.loadView("RessortsView");
+
+        if (view != null) {
+            contentPane.getChildren().clear();
+            contentPane.getChildren().add(view);
+
+            AnchorPane.setTopAnchor(view, 0.0);
+            AnchorPane.setBottomAnchor(view, 0.0);
+            AnchorPane.setLeftAnchor(view, 0.0);
+            AnchorPane.setRightAnchor(view, 0.0);
+        }
+    }
+
+
+
+
+    @FXML
+    void loadVertragstypen(ActionEvent event) { // Verträge laden
+        ViewLoader loader = new ViewLoader();
+        Pane view = loader.loadView("VertragstypenView");
+
+        if (view != null) {
+            contentPane.getChildren().clear();
+            contentPane.getChildren().add(view);
+
+            AnchorPane.setTopAnchor(view, 0.0);
+            AnchorPane.setBottomAnchor(view, 0.0);
+            AnchorPane.setLeftAnchor(view, 0.0);
+            AnchorPane.setRightAnchor(view, 0.0);
+        }
+    }
+
+
+
+
+    @FXML
+    void loadProjektdaten(ActionEvent event) { // Projekte laden
+        ViewLoader loader = new ViewLoader();
+        Pane view = loader.loadView("ProjektdatenView");
+
+        if (view != null) {
+            contentPane.getChildren().clear();
+            contentPane.getChildren().add(view);
+
+            AnchorPane.setTopAnchor(view, 0.0);
+            AnchorPane.setBottomAnchor(view, 0.0);
+            AnchorPane.setLeftAnchor(view, 0.0);
+            AnchorPane.setRightAnchor(view, 0.0);
+        }
+    }
+
 
 }

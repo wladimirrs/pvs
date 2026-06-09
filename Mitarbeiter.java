@@ -4,7 +4,7 @@ import javafx.beans.property.*;
 
 public class Mitarbeiter {
 
-    private final IntegerProperty id = new SimpleIntegerProperty(); // Zeichenketten aktualisieren
+    private final IntegerProperty id = new SimpleIntegerProperty();
     private final StringProperty nachname = new SimpleStringProperty();
     private final StringProperty vorname = new SimpleStringProperty();
     private final StringProperty personalnummer = new  SimpleStringProperty();
@@ -14,7 +14,7 @@ public class Mitarbeiter {
     private ObjectProperty<Ort> ort = new SimpleObjectProperty<>();
     private ObjectProperty<Ressort> ressort = new SimpleObjectProperty<>();
     private ObjectProperty<Vertragstyp> vertragstyp = new SimpleObjectProperty<>();
-                                                                    // Konstruktor
+                                                                    // Konstruktor mit id für aendern
     public Mitarbeiter(int id, String nachname, String vorname, String personalnummer, String strasse, String hausnummer, String geburtsdatum, Ort ort, Ressort ressort, Vertragstyp vertragstyp) {   // Konstruktor
         this.id.set(id);
         this.nachname.set(nachname);
@@ -27,7 +27,7 @@ public class Mitarbeiter {
         this.ressort.set(ressort);
         this.vertragstyp.set(vertragstyp);
     }
-
+                                                                    // Konstruktor ohne id für einfuegen
     public Mitarbeiter(String nachname, String vorname, String personalnummer, String strasse, String hausnummer, String geburtsdatum, Ort ort, Ressort ressort, Vertragstyp vertragstyp) {   // Konstruktor
         this.nachname.set(nachname);
         this.vorname.set(vorname);
@@ -66,7 +66,6 @@ public class Mitarbeiter {
     public void setNachname(String value) {
         nachname.set(value);
     }
-
     public StringProperty nachnameProperty() {
         return nachname;
     }

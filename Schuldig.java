@@ -21,11 +21,9 @@ public class Schuldig {
     public int getId() {
         return id;
     }
-
     public String getNachname() {
         return nachname;
     }
-
     public String getVorname() {
         return vorname;
     }
@@ -33,11 +31,9 @@ public class Schuldig {
     public void setId(int id) {
         this.id = id;
     }
-
     public void setNachname(String nachname) {
         this.nachname = nachname;
     }
-
     public void setVorname(String vorname) {
         this.vorname = vorname;
     }

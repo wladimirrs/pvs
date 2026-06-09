@@ -21,7 +21,7 @@ public class MitarbeiterController {
     @FXML
     private Button btnSuchen;
 
-    @FXML private AnchorPane mitarbeiterPane;                   // Fenster
+
     @FXML private TableView<Mitarbeiter> tblMitarbeiter;        // Tabelle
 
     @FXML private TableColumn<Mitarbeiter, Number> colId;             // Tabellenspalten
@@ -35,7 +35,7 @@ public class MitarbeiterController {
     @FXML private TableColumn<Mitarbeiter, Ressort> colRessort;
     @FXML private TableColumn<Mitarbeiter, Vertragstyp> colVertragstyp;
 
-    @FXML private TextField txtEingabe;
+    @FXML private TextField txtEingabe;                         // Eingabefelder
     @FXML private TextField txtId;
     @FXML private TextField txtNachname;
     @FXML private TextField txtVorname;
@@ -68,14 +68,14 @@ public class MitarbeiterController {
         colOrt.setCellValueFactory(data -> data.getValue().ortProperty());
         colRessort.setCellValueFactory(data -> data.getValue().ressortProperty());
         colVertragstyp.setCellValueFactory(data -> data.getValue().vertragstypProperty());
-        daten = MitarbeiterDAO.getAll();   // 💾 DB LADEN
+        daten = MitarbeiterDAO.getAll();
         tblMitarbeiter.setItems(daten);
     }
 
 
 
     @FXML
-    void einfuegen(ActionEvent event) {
+    void einfuegen(ActionEvent event) {     // Inhalt aus den Eingabefeldern entnehmen
         String nachname = txtNachname.getText();
         String vorname = txtVorname.getText();
         String personalnummer = txtPersonalnummer.getText();
@@ -95,16 +95,16 @@ public class MitarbeiterController {
                 strasse,
                 hausnummer,
                 geburtsdatum,
-                Ort.fromId(ort),
-                Ressort.fromId(ressort),
-                Vertragstyp.fromId(vertragstyp)
+                MitarbeiterDAO.getByOrt(ort),       // da Foreign Key
+                MitarbeiterDAO.getByRessort(ressort),
+                MitarbeiterDAO.getByVertragstyp(vertragstyp)
         );
         MitarbeiterDAO.insert(m);
         daten.setAll(MitarbeiterDAO.getAll());
     }
 
     @FXML
-    void loeschen(ActionEvent event) {
+    void loeschen(ActionEvent event) {              // gewählten Datensatz löschen
         Mitarbeiter selected = tblMitarbeiter.getSelectionModel().getSelectedItem();
         if (selected != null) {
             MitarbeiterDAO.delete(selected.getId());
@@ -135,9 +135,9 @@ public class MitarbeiterController {
                 strasse,
                 hausnummer,
                 geburtsdatum,
-                Ort.fromId(ort),
-                Ressort.fromId(ressort),
-                Vertragstyp.fromId(vertragstyp)
+                MitarbeiterDAO.getByOrt(ort),
+                MitarbeiterDAO.getByRessort(ressort),
+                MitarbeiterDAO.getByVertragstyp(vertragstyp)
         );
         MitarbeiterDAO.update(m);
         daten.setAll(MitarbeiterDAO.getAll());
@@ -152,7 +152,7 @@ public class MitarbeiterController {
         }
         ObservableList<Mitarbeiter> gefiltert = FXCollections.observableArrayList(
                 daten.stream()
-                        .filter(m ->
+                        .filter(m ->        // Suche nicht nach id
                                 (m.getNachname() != null && m.getNachname().toLowerCase().contains(query)) ||
                                         (m.getVorname() != null && m.getVorname().toLowerCase().contains(query)) ||
                                         (m.getPersonalnummer() != null && m.getPersonalnummer().toLowerCase().contains(query)) ||

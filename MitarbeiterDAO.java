@@ -131,5 +131,62 @@ public class MitarbeiterDAO {
 
 
 
+    public static Ort getByOrt(int id) {
+        String sql = "SELECT * FROM orte WHERE id = ?";
+        try (Connection con = DB.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Ort(
+                        rs.getInt("id"),
+                        rs.getString("plz"),
+                        rs.getString("ortsname")
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Ressort getByRessort(int id) {
+        String sql = "SELECT * FROM ressorts WHERE id = ?";
+        try (Connection con = DB.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Ressort(
+                        rs.getInt("id"),
+                        rs.getString("bezeichnung")
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Vertragstyp getByVertragstyp(int id) {
+        String sql = "SELECT * FROM vertragstypen WHERE id = ?";
+        try (Connection con = DB.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Vertragstyp(
+                        rs.getInt("id"),
+                        rs.getString("bezeichnung")
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
 
 }
